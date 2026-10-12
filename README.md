@@ -8,6 +8,7 @@ Programming for Business Analytics · National Tsing Hua University
 - Malvin Julius 陳金富/112006270
 - William Tanujaya 陳德偉/112006402
 - Jonathan Neville 曹德榮/113006440
+- Roderick Rudiyanto 李偉權/112006462
 
 ## Topic
 
