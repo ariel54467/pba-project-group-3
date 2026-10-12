@@ -24,7 +24,20 @@ The analysis will focus on English, single-turn conversations. We will extract f
 
 ## Data
 
-_To be completed._
+We use the [Chatbot Arena Conversations dataset](https://huggingface.co/datasets/lmsys/chatbot_arena_conversations)
+released by LMSYS. It contains 33,000 pairwise comparisons in which two anonymous
+models answered the same prompt and a human voted for the better response.
+
+To reproduce our analysis, set up the data as follows.
+
+**1. Download the dataset.** From the link above, download
+`train-00000-of-00001-cced8514c7ed782a.parquet` and place it in `data/raw/`.
+
+**2. Install the `arrow` package**, which is required to read Parquet files:
+
+```r
+install.packages("arrow")
+```
 
 ## Method
 
