@@ -15,8 +15,12 @@ Programming for Business Analytics · National Tsing Hua University
 What Makes an AI Answer Win?
 
 ## Overview
+This project investigates how the length and formatting of AI-generated answers relate to human preference. We will analyze pairs of AI responses to the same prompt and the human votes indicating which response was preferred.
 
-_To be completed._
+**Our central research question is:**
+    _"How are answer length and formatting associated with human preference, after accounting for which AI models produced the answers?"_
+
+The analysis will focus on English, single-turn conversations. We will extract features such as word count, paragraph count, bullet lists, headings, and code blocks, then use logistic regression to examine their relationship with preference. We will also evaluate whether these features improve predictions on held-out data beyond using model identities alone.
 
 ## Data
 
