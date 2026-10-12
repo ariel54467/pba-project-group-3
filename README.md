@@ -5,9 +5,8 @@ Programming for Business Analytics · National Tsing Hua University
 ## Team Members
 
 - Ariel Arella Sugandik 何玉屏 / 112006269
+- Malvin Julius 陳金富/112006270
 
-<!-- Teman-teman: tambahkan baris nama kalian sendiri di atas ini,
-     lalu commit & push dari RStudio (bukan dari website GitHub). -->
 
 ## Topic
 
