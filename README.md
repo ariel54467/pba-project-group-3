@@ -7,6 +7,7 @@ Programming for Business Analytics · National Tsing Hua University
 - Ariel Arella Sugandik 何玉屏 / 112006269
 - Malvin Julius 陳金富/112006270
 - William Tanujaya 陳德偉/112006402
+- Jonathan Neville 曹德榮/113006440
 
 ## Topic
 
