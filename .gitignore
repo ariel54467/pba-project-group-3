@@ -1,0 +1,8 @@
+# Local source data and generated analysis files. Already tracked files remain tracked.
+/data/raw/
+/data/processed/
+/outputs/
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
