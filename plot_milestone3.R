@@ -59,48 +59,53 @@ overlap_counts <- xtabs(n ~ category + group, data = groups)
 coverage <- 100 * prop.table(overlap_counts, 1L)
 
 dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
-pdf(output, width = 8.3, height = 10.8, title = "Group 3 | Milestone 3")
-par(mar = c(3.4, 9, 3.8, 2), oma = c(1.4, 2, 1.7, 2),
-    mfrow = c(4, 1), family = "sans", las = 1)
+pdf(output, width = 8.3, height = 10.8, title = "PBA Group 3 | Chatbot Arena")
+layout(matrix(1:5), heights = c(0.94, 2.55, 1.55, 2.55, 1.55))
+par(oma = c(1.4, 2, 1.6, 2), family = "sans", las = 1)
+par(mar = c(0, 0, 0, 0))
+plot.new()
+text(0.5, 0.79, "PBA Group 3", font = 2, cex = 1.85)
+text(0.5, 0.49, "Chatbot Arena", font = 2, cex = 1.85)
+text(0.5, 0.21, "Examining how placement on the left relates to the chance of winning",
+     cex = 0.94)
+chart_margins <- c(3.15, 9, 3.2, 2)
 colors <- c("#206B83", "#879AA4", "#D6BA76")
 
 note <- function(title, lines) {
+  par(mar = c(0, 2, 0.25, 2))
   plot.new()
-  text(-0.13, 0.94, title, adj = 0, font = 2, xpd = NA)
+  text(0.02, 0.92, title, adj = 0, font = 2, xpd = NA)
   wrapped <- unlist(lapply(lines, function(x) c(strwrap(x, width = 104), "")))
-  text(-0.13, seq(0.71, by = -0.102, length.out = length(wrapped)), wrapped,
+  text(0.02, seq(0.73, by = -0.108, length.out = length(wrapped)), wrapped,
        adj = 0, xpd = NA, cex = 1.06)
 }
 
-par(xaxs = "i")
+par(mar = chart_margins, xaxs = "i")
 barplot(share, horiz = TRUE, xlim = c(0, 100), col = colors, border = NA,
         names.arg = sprintf("%s\n(n=%s)", names(n), format(n, big.mark = ",")))
-title("Figure 1. Recorded votes by focal model position", line = 2.5)
-mtext("Share of recorded battles (%)", side = 1, line = 2.5)
+title("Figure 1. Recorded votes by focal model position", line = 2.25)
+mtext("Share of recorded battles (%)", side = 1, line = 2.25)
 legend("top", legend = rownames(share), fill = colors, horiz = TRUE,
        bty = "n", inset = c(0, -0.12), xpd = NA, cex = 0.8)
 gap <- share[1L, 1L] - share[1L, 2L]
 note("What stands out", c(
-  sprintf("The focal model won %.1f%% of left-side battles and %.1f%% of right-side battles (left minus right: %+.1f percentage points). Ties accounted for %.1f%% on the left and %.1f%% on the right.",
+  sprintf("The focal model won %.1f%% of battles on the left and %.1f%% of battles on the right (left minus right: %+.1f percentage points). Ties accounted for %.1f%% on the left and %.1f%% on the right.",
           share[1L, 1L], share[1L, 2L], gap, share[3L, 1L], share[3L, 2L]),
   "This shows how often users picked the focal model outright before accounting for the opponent and week. Retaining ties keeps the denominator aligned with the research question. The pooled gap is descriptive."
 ))
 
-barplot(t(coverage), horiz = TRUE, xlim = c(0, 100), col = colors[c(1, 3)], border = NA)
-title("Figure 2. Overlap within model pair and calendar week", line = 2.5)
-mtext("Share of groups or battles (%)", side = 1, line = 2.5)
+par(mar = chart_margins)
+barplot(t(coverage), names.arg = c("Pair and week", "Battles"), horiz = TRUE, xlim = c(0, 100), col = colors[c(1, 3)], border = NA)
+title("Figure 2. Overlap within model pair and calendar week", line = 2.25)
+mtext("Share of groups or battles (%)", side = 1, line = 2.25)
 legend("top", legend = colnames(coverage), fill = colors[c(1, 3)], horiz = TRUE,
        bty = "n", inset = c(0, -0.12), xpd = NA, cex = 0.8)
 note("Why overlap matters", c(
-  sprintf("The focal model appeared on both sides in %d of %d pair-week groups (%.1f%%). Those groups accounted for %s of %s battles (%.1f%%).",
+  sprintf("The focal model appeared on both sides in %d of %d groups defined by model pair and week (%.1f%%). Those groups accounted for %s of %s battles (%.1f%%).",
           overlap_counts[1L, 1L], sum(overlap_counts[1L, ]), coverage[1L, 1L],
           format(overlap_counts[2L, 1L], big.mark = ","),
           format(sum(overlap_counts[2L, ]), big.mark = ","), coverage[2L, 1L]),
-  "Groups with both orientations let us compare the same focal model against the same opponent in the same week. One-sided groups cannot supply that comparison. Having both sides does not establish random assignment."
+  "Groups with both orientations let us compare the same focal model against the same opponent in the same week. Groups with only one orientation cannot supply that comparison. Having both sides does not establish random assignment."
 ))
-mtext("PBA Group 3 | Chatbot Arena: does displaying a response on the left affect its chance of winning?",
-      side = 3, outer = TRUE, line = 0.3, cex = 0.78)
-mtext("Data: LMSYS Chatbot Arena Conversations, cleaned anonymous English single-turn battles.",
-      side = 1, outer = TRUE, line = 0.3, cex = 0.72)
 invisible(dev.off())
 message("Wrote ", output)
