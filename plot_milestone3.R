@@ -1,5 +1,3 @@
-# From the repository root: Rscript plot_milestone3.R
-# Optional arguments: prepared CSV or RDS, then output PDF.
 script <- grep("^--file=", commandArgs(FALSE), value = TRUE)
 root <- dirname(normalizePath(sub("^--file=", "", script[1L])))
 source(file.path(root, "R", "arena_helpers.R"))
